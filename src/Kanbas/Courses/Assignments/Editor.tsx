@@ -82,7 +82,7 @@ export default function AssignmentEditor() {
 <label htmlFor="wd-available-from"> Available From </label><br/>
 <input type="date"
       id="wd-available-from"
-      value="2024-08-05"/><br/><br/>
+      value="2024-05-08"/><br/><br/>
   <label htmlFor="wd-available-until"> Until </label><br/>
 <input type="date"
       id="wd-available-until"
