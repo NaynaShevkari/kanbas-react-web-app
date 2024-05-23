@@ -36,8 +36,8 @@ export default function AssignmentEditor() {
       <br/>
       <tr>
       <td align="left" valign="top">
-      <label htmlFor="wd-select-Grade-Type"> Display Grade Type </label>
-      <select id="wd-Grade-Type">
+      <label htmlFor="wd-display-grade-as"> Display Grade Type </label>
+      <select id="wd-display-grade-as">
         <option value="Grade">Percentage</option>
         <option value="Grade">GPA</option>
       </select>
@@ -46,7 +46,7 @@ export default function AssignmentEditor() {
       <br/>
       <tr>
       <td align="left" valign="top">
-      <label htmlFor="wd-select-Submission-Type"> Submission Type </label>
+      <label htmlFor="wd-submission-type"> Submission Type </label>
       <select id="wd-Submission-Type">
         <option value="Submission">Online</option>
         <option value="Submission">Offline</option>
@@ -56,37 +56,37 @@ export default function AssignmentEditor() {
       <br/>
       <label>Online Entry Options</label><br/>
 
-<input type="checkbox" name="Entry Option" id="wd-chkbox-text"/>
-<label htmlFor="wd-chkbox-text">Text Entry</label><br/>
+<input type="checkbox" name="Entry Option" id="wd-text-entry"/>
+<label htmlFor="wd-text-entry">Text Entry</label><br/>
 
-<input type="checkbox" name="Entry Option" id="wd-chkbox-website"/>
-<label htmlFor="wd-chkbox-website">Website URL</label><br/>
+<input type="checkbox" name="Entry Option" id="wd-website-url"/>
+<label htmlFor="wd-website-url">Website URL</label><br/>
 
-<input type="checkbox" name="Entry Option" id="wd-chkbox-media"/>
-<label htmlFor="wd-chkbox-media">Media Recordings</label><br/>
+<input type="checkbox" name="Entry Option" id="wd-media-recordings"/>
+<label htmlFor="wd-media-recordings">Media Recordings</label><br/>
 
-<input type="checkbox" name="Entry Option" id="wd-chkbox-annotation"/>
-<label htmlFor="wd-chkbox-annotation">Student Annotation</label><br/>
+<input type="checkbox" name="Entry Option" id="wd-student-annotation"/>
+<label htmlFor="wd-student-annotation">Student Annotation</label><br/>
 
-<input type="checkbox" name="Entry Option" id="wd-chkbox-file"/>
-<label htmlFor="wd-chkbox-file">File Uploads</label><br/><br/>
+<input type="checkbox" name="Entry Option" id="wd-file-upload"/>
+<label htmlFor="wd-file-upload">File Uploads</label><br/><br/>
 
-<label htmlFor="wd-text-fields-assign">Assign to </label><br/>
-    <input id="wd-text-fields-assign" value="Everyone"  /> <br /><br/>
+<label htmlFor="wd-assign-to">Assign to </label><br/>
+    <input id="wd-assign-to" value="Everyone"  /> <br /><br/>
 
-<label htmlFor="wd-text-fields-due"> Due </label><br/>
+<label htmlFor="wd-due-date"> Due </label><br/>
 <input type="date"
-      id="wd-text-fields-due"
-      value="2024-06-05"/><br/><br/>
+      id="wd-due-date"
+      value="2024-05-22"/><br/><br/>
 
-<label htmlFor="wd-text-fields-available"> Available From </label><br/>
+<label htmlFor="wd-available-from"> Available From </label><br/>
 <input type="date"
-      id="wd-text-fields-available"
-      value="2024-06-05"/><br/><br/>
-  <label htmlFor="wd-text-fields-until"> Until </label><br/>
+      id="wd-available-from"
+      value="2024-08-05"/><br/><br/>
+  <label htmlFor="wd-available-until"> Until </label><br/>
 <input type="date"
-      id="wd-text-fields-until"
-      value="2024-06-05"/><br/>
+      id="wd-available-until"
+      value="2024-05-22"/><br/>
     </table>
     <div >
             <hr color="grey"/>
