@@ -2,6 +2,7 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
+import { TbHelpCircleFilled } from "react-icons/tb";
 export default function KanbasNavigation() {
     return (
     <div id="wd-kanbas-navigation" className="list-group rounded-0">
@@ -36,6 +37,12 @@ export default function KanbasNavigation() {
         <LiaCogSolid 
         className="fs-1 text-danger" /><br />
         Labs</a>
+
+        <a id="wd-labs-link" href="#/Labs" className="list-group-item text-white bg-black text-center border-0">
+        <TbHelpCircleFilled  
+        className="fs-1 text-danger" /><br />
+        Help</a>
+
         </div>
   );}
   
