@@ -1,8 +1,7 @@
 import React from 'react';
 import { FaFileImport, FaFileExport, FaSearch, FaCaretDown } from "react-icons/fa";
 import { CiFilter, CiSettings } from "react-icons/ci";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
 export default function Grades() {
   return (
     <div className="container-fluid">

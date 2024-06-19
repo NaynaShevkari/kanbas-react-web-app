@@ -9,7 +9,7 @@ import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import Grades from "./Grades";
 export default function Courses() {
   const { cid } = useParams();
-  const course = courses.find((course) => course.number === cid);
+  const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
   return (
     <div id="wd-courses">
