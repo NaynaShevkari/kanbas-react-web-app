@@ -1,320 +1,141 @@
-import {useLocation, useParams} from "react-router";
-import {assignments} from "../../Database";
-import {Link} from "react-router-dom";
+import { useLocation, useParams } from "react-router";
+import { assignments } from "../../Database";
+import { Link } from "react-router-dom";
 
 export default function AssignmentEditor() {
-const {cid} = useParams();
-const {pathname} = useLocation();
-const aid = pathname.split("/").pop();
-const assignment = assignments.find(a => a._id === aid);
+    const { cid } = useParams();
+    const { pathname } = useLocation();
 
-  return (
+    const assignmentId = pathname.split("/").pop();
+    const currentAssignment = assignments.find(assignment => assignment._id === assignmentId);
 
-<div id="wd-assignments-editor" className="container w-100">
+    return (
+        <div className="container">
+            <div className="row mb-3">
+                <label htmlFor="assignment-name" className="form-label"><h2>Assignment Name</h2></label>
+                <input id="assignment-name" className="form-control" defaultValue={currentAssignment?.title} />
+            </div>
 
-<div className="form-group row">
-        <div className="col-md-21">
-          <div className="form-group col-md-21">
-            <label htmlFor="wd-name">
-              <h5 className="text-right">Assignment Name</h5>
-            </label>
-            <input
-              id="wd-name"
-              className="form-control col-md-21"
-              value={assignment?.title}
-            /><br></br>
-          </div>
-          <div className="form-group col-md-21">
-            <textarea
-              id="wd-description"
-              className="form-control"
-              rows={5}>
-              {assignment?.description}
-            </textarea>
-          </div>
-          <br />
-          </div>
-          </div>
-      <div className="row">
-          <div className="col-md-6 text-end">
-            <label className="mx-3">Points</label>
-          </div>
-          <div className="col-md-6">
-          <input id="wd-points"
-                  className="form-control"
-                  value={assignment?.points} />
-          </div>
-        </div>
-        <br/>
-        <div className="row">
-          <div className="col-md-6 text-end">
-            <label className="mx-3">Assignment Group</label>
-          </div>
-          <div className="col-md-6">
-            <select className="form-control form-select">
-              <option>ASSIGNMENTS</option>
-              <option>PROJECT</option>
-              <option>Labs</option>
-            </select>
-          </div>
-        </div>
+            <div className="row mb-3">
+                <textarea id="assignment-description" className="form-control" rows={10} defaultValue={currentAssignment?.description} />
+            </div>
 
-        <br />
-
-        <div className="row">
-          <div className="col-md-6 text-end">
-            <label>Display Grade as</label>
-          </div>
-          <div className="col-md-6">
-            <select className="form-control form-select">
-              <option>Percentage</option>
-              <option>Grade</option>
-              <option>Points</option>
-            </select>
-          </div>
-        </div>
-      <br/>
-
-      <div className="row">
-          <div className="col-md-6 text-end">
-            <label>Submission Type</label>
-          </div>
-          <div className="col-md-6">
-          <div className="border p-2">
-            <select className="form-control from-select">
-              <option>Online</option>
-              <option>Offline</option>
-            </select><br/>
-
-            <div className="row">
-            <label><b>Online Entry Options</b></label>
-          <div className="col-md-6">
-            <input type="checkbox" id="online_entry_options1" />
-            <label htmlFor="online_entry_options1" className="mx-1">Text Entry</label>
-            <br />
-            <input type="checkbox" id="online_entry_options2" />
-            <label htmlFor="online_entry_options2" className="mx-1">Website URL</label>
-            <br />
-            <input type="checkbox" id="online_entry_options3" />
-            <label htmlFor="online_entry_options3" className="mx-1">Media Recordings</label>
-            <br />
-            <input type="checkbox" id="online_entry_options4" />
-            <label htmlFor="online_entry_options4" className="mx-1">Student Annotation</label>
-            <br />
-            <input type="checkbox" id="online_entry_options5" />
-            <label htmlFor="online_entry_options5" className="mx-1">File Uploads</label>
-
-          </div>
-        </div>
-       </div>
-        </div>
-        <br />
-         </div>
-        <br/>
-        <div className="row">
-          <div className="col-md-6 text-end">
-            <label>Assign</label>
-          </div>
-          <div className="col-md-6">
-            <div className="border p-2">
-              <label><b>Assign to</b></label>
-              <br />
-              <input className="form-control" value="Everyone" />
-              <br />
-
-              <label><b>Due</b></label>
-              <input
-                className="form-control"
-                type="date"
-                value={assignment?.ddate}/>
-              <br />
-              <div className="row">
-                <div className="col-md-6">
-                  <label><b>Available from</b></label>
-                  <input className="form-control w-30" type="date" value={assignment?.adate}/>
+            <div className="row mb-3">
+                <div className="col-md-6 text-end">
+                    <label htmlFor="assignment-points" className="col-form-label">Points</label>
                 </div>
-
                 <div className="col-md-6">
-                  <label><b>Until</b></label>
-                  <input className="form-control w-30" type="date" />
+                    <input id="assignment-points" type="number" className="form-control" defaultValue={currentAssignment?.points} />
                 </div>
-              </div>
-              </div>
-              </div>
-              </div>
-            <hr/>
-            <div className="d-flex">
-          <div className="ms-auto">
-            <Link key={'save'} to={`/Kanbas/Courses/${cid}/Assignments`}>
-                  <input type="button" className="btn btn-danger float-end ms-2" value="Save"/>
-            </Link>
-            <Link key={'cancel'} to={`/Kanbas/Courses/${cid}/Assignments`}>
-                   <input type="button" className="btn btn-secondary float-end" value="Cancel"/>
-            </Link>
-          </div>
-        </div><br/>
-</div>
-  );
+            </div>
+
+            <div className="row mb-3">
+                <div className="col-md-6 text-end">
+                    <label htmlFor="assignment-group" className="col-form-label">Assignment Group</label>
+                </div>
+                <div className="col-md-6">
+                    <select id="assignment-group" className="form-select">
+                        <option>ASSIGNMENTS</option>
+                        <option>QUIZZES</option>
+                        <option>EXAMS</option>
+                        <option>PROJECT</option>
+                    </select>
+                </div>
+            </div>
+
+            <div className="row mb-3">
+                <div className="col-md-6 text-end">
+                    <label htmlFor="grade-display" className="col-form-label">Display Grade as</label>
+                </div>
+                <div className="col-md-6">
+                    <select id="grade-display" className="form-select">
+                        <option>Percentage</option>
+                        <option>Points</option>
+                        <option>Complete/Incomplete</option>
+                        <option>Letter Grade</option>
+                    </select>
+                </div>
+            </div>
+
+            <div className="row mb-3">
+                <div className="col-md-6 text-end">
+                    <label htmlFor="submission-type" className="col-form-label">Submission Type</label>
+                </div>
+                <div className="col-md-6">
+                    <div className="border p-2">
+                        <select id="submission-type" className="form-select">
+                            <option>Online</option>
+                            <option>On Paper</option>
+                            <option>No Submission</option>
+                        </select>
+                        <br />
+                        <div>
+                            <label><b>Online Entry Options</b></label>
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" id="online-option-text" />
+                                <label className="form-check-label" htmlFor="online-option-text">Text Entry</label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" id="online-option-url" />
+                                <label className="form-check-label" htmlFor="online-option-url">Website URL</label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" id="online-option-media" />
+                                <label className="form-check-label" htmlFor="online-option-media">Media Recordings</label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" id="online-option-annotation" />
+                                <label className="form-check-label" htmlFor="online-option-annotation">Student Annotation</label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" id="online-option-file" />
+                                <label className="form-check-label" htmlFor="online-option-file">File Uploads</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="row mb-3">
+                <div className="col-md-6 text-end">
+                    <label htmlFor="assign-to" className="col-form-label">Assign</label>
+                </div>
+                <div className="col-md-6">
+                    <div className="border p-2">
+                        <label><b>Assign to</b></label>
+                        <input id="assign-to" className="form-control" defaultValue="Everyone" />
+                        <br />
+                        <label><b>Due</b></label>
+                        <input id="due-date" className="form-control" type="date" defaultValue={currentAssignment?.due} />
+                        <br />
+                        <div className="row">
+                            <div className="col-md-6">
+                                <label><b>Available from</b></label>
+                                <input id="available-from" className="form-control" type="date" defaultValue={currentAssignment?.available} />
+                            </div>
+                            <div className="col-md-6">
+                                <label><b>Until</b></label>
+                                <input id="available-until" className="form-control" type="date" defaultValue="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="row mb-3">
+                <hr />
+            </div>
+
+            <div className="mb-2 text-end">
+                <Link key={'save'} to={`/Kanbas/Courses/${cid}/Assignments`}>
+                    <input type="button" className="btn btn-danger ms-2" value="Save" />
+                </Link>
+                <Link key={'cancel'} to={`/Kanbas/Courses/${cid}/Assignments`}>
+                    <input type="button" className="btn btn-secondary ms-2" value="Cancel" />
+                </Link>
+            </div>
+
+            <div className="row" style={{ height: '30px', width: '100%' }}></div>
+        </div>
+    )
 }
-
-
-// import "./Assignments.css"
-// export default function AssignmentEditor() {
-//   return (
-
-//     <div id="wd-assignments-editor" className="container">
-
-//       <div className="form-group row">
-//         <div >
-//           <div className="form-group">
-//             <label htmlFor="wd-name">
-//               <h2 className="text-right">Assignment Name</h2>
-//             </label>
-//             <input
-//               id="wd-name"
-//               className="form-control"
-//               value="A1"
-//             /><br></br>
-//           </div>
-//           <div className="form-group">
-//             <textarea
-//               id="wd-description"
-//               className="form-control"
-//               rows={6}
-//             >
-//               The assignment is available online
-//               Submit a link to the landing page of your web application
-//               runnung on Netlify.The landing page should incude the following:
-//               Your Full name and section links to each of the lab assignments
-//               Link to the Canbas application Links to all relevant source code repositories
-//               The kanbas application should include a link to navigate back to the landing page.
-//             </textarea>
-//           </div><br />
-//         </div>
-//       </div>
-//       <div className="row">
-//         <div className="col-md-6 text-end">
-//           <label className="mx-3">Points</label>
-//         </div>
-//         <div className="col-md-6">
-//           <input id="wd-points"
-//             className="form-control"
-//             value={100} />
-//         </div>
-//       </div>
-//       <br />
-//       <div className="row">
-//         <div className="col-md-6 text-end">
-//           <label className="mx-3">Assignment Group</label>
-//         </div>
-//         <div className="col-md-6">
-//           <select className="form-control form-select">
-//             <option>ASSIGNMENTS</option>
-//             <option>QUIZZES</option>
-//             <option>EXAMS</option>
-//             <option>PROJECT</option>
-//           </select>
-//         </div>
-//       </div>
-
-//       <br />
-
-//       <div className="row">
-//         <div className="col-md-6 text-end">
-//           <label>Display Grade as</label>
-//         </div>
-//         <div className="col-md-6">
-//           <select className="form-control form-select">
-//             <option>Percentage</option>
-//             <option>Points</option>
-//             <option>Complete/Incomplete</option>
-//             <option>Letter Grade</option>
-//           </select>
-//         </div>
-//       </div>
-//       <br />
-
-//       <div className="row">
-//         <div className="col-md-6 text-end">
-//           <label>Submission Type</label>
-//         </div>
-//         <div className="col-md-6">
-//           <div className="border p-2">
-//             <select className="form-control from-select">
-//               <option>Online</option>
-//               <option>On Paper</option>
-//               <option>No Submission</option>
-//             </select><br />
-
-//             <div className="row">
-//               <label><b>Online Entry Options</b></label>
-//               <div className="col-md-6">
-//                 <input type="checkbox" id="wd-text-entry" />
-//                 <label htmlFor="wd-text-entry" className="mx-1">Text Entry</label>
-//                 <br />
-//                 <input type="checkbox" id="wd-website-url" checked/>
-//                 <label htmlFor="wd-website-url" className="mx-1">Website URL</label>
-//                 <br />
-//                 <input type="checkbox" id="wd-media-recordings" />
-//                 <label htmlFor="wd-media-recordings" className="mx-1">Media Recordings</label>
-//                 <br />
-//                 <input type="checkbox" id="wd-student-annotation" />
-//                 <label htmlFor="wd-student-annotation" className="mx-1">Student Annotation</label>
-//                 <br />
-//                 <input type="checkbox" id="wd-file-upload" />
-//                 <label htmlFor="wd-file-upload" className="mx-1">File Uploads</label>
-
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//         <br />
-//       </div>
-//       <br />
-//       <div className="row">
-//         <div className="col-md-6 text-end">
-//           <label>Assign</label>
-//         </div>
-//         <div className="col-md-6">
-//           <div className="border p-2">
-//             <label><b>Assign to</b></label>
-//             <br />
-//             <input className="form-control" value="Everyone" />
-//             <br />
-
-//             <label><b>Due</b></label>
-//             <input type="date" id="wd-due-date" value="2024-05-22"
-//               className="form-control"/>
-//             <br />
-            
-//             <div className="row">
-//               <div className="col-md-6">
-//                 <label><b>Available from</b></label>
-//                 <input type="date" id="wd-available-from" value="2024-05-08"
-//                 className="form-control"/>
-//               </div>
-
-//               <div className="col-md-6">
-//                 <label><b>Until</b></label>
-//                 <input type="date" id="wd-available-until" value="2024-05-22"
-//                 className="form-control"/>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//       <hr />
-//       <div className="d-flex">
-//         <div className="ms-auto">
-//           <button className="btn btn-danger ms-3 float-end">
-//             Save
-//           </button>
-//           <button
-//             className="btn btn-secondary float-end">
-//             Cancel
-//           </button>
-//         </div>
-//       </div><br />
-//     </div>
-//   );
-// }

@@ -9,8 +9,12 @@ import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import Grades from "./Grades";
 export default function Courses() {
   const { cid } = useParams();
+  console.log("Func useParams is",useParams())
+  console.log("This is cid",cid)
   const course = courses.find((course) => course._id === cid);
+  console.log("This is course",course)
   const { pathname } = useLocation();
+  
   return (
     <div id="wd-courses">
       <h2 className="text-danger">
@@ -35,8 +39,6 @@ export default function Courses() {
           </Routes>
         </div>
       </div>
-
-
     </div>
   );
 }

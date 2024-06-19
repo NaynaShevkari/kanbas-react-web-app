@@ -4,6 +4,7 @@ export default function CoursesNavigation() {
   const { cid } = useParams();
   const { pathname } = useLocation();
   const links = ["Home", "Modules", "Piazza", "Zoom", "Assignments", "Quizzes", "Grades"];
+  console.log(useLocation());
   return (
 <div id="wd-courses-navigation" className="list-group fs-5 rounded-0">{links.map((link) => (
 <Link key={`#Kanbas/Courses/${cid}/${link}`} to={`${link}`}
@@ -14,3 +15,4 @@ export default function CoursesNavigation() {
 ))}  
 </div>
 );}
+

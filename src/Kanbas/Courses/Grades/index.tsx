@@ -1,120 +1,97 @@
-import React from 'react';
+
+import { useParams } from "react-router";
+import { assignments, enrollments, grades, users } from "../../Database";
 import { FaFileImport, FaFileExport, FaSearch, FaCaretDown } from "react-icons/fa";
 import { CiFilter, CiSettings } from "react-icons/ci";
 import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 export default function Grades() {
-  return (
-    <div className="container-fluid">
-      <div className="row">
-      {/* <div className="row"> */}
-      {/* <div className="row"> */}
-        <div className="col-md-8 offset-md-2">
-          <div className="btn-group ml-2 d-inline me-1 float-end">
-            <button type="button" className="btn btn-light mr-2">
-              <CiSettings className="fs-4" />
-            </button>
-          </div>
-          <div className="btn-group ml-2 dropdown d-inline me-1 float-end">
-            <button type="button" className="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <FaFileExport className="mr-1" /> Export
-            </button>
-          </div>
-          <div className="btn-group ml-2 d-inline me-1 float-end">
-            <button type="button" className="btn btn-light mr-2">
-              <FaFileImport className="mr-1" /> Import
-            </button>
-          </div>
-          <br /><br />
-          <div className="row">
-            <div className="col-md-6">
-              <h6><b>Student Names</b></h6>
-              <div className="input-group">
-                <span className="input-group-text"><FaSearch /> </span>
-                <input placeholder="Search Students" type="text" className="form-control" />
-                <span className="input-group-text"><FaCaretDown /></span>
-              </div>
+    const { cid } = useParams();
+    const enrolledStudents = enrollments.filter((enrollment) => enrollment.course === cid);
+    const students = enrolledStudents.map((enrollment) => users.find((user) => user._id === enrollment.user));
+    const courseAssignments = assignments.filter((assignment) => assignment.course === cid);
+    const studentsWithGrades = students.map((student) => {
+        const studentGrades = courseAssignments.map((assignment) => {
+            const studentGrade = grades.find((grade) => grade.assignment === assignment._id && grade.student === student?._id);
+            return studentGrade ? studentGrade.grade : "N/A";
+        });
+        return {
+            ...student,
+            grades: studentGrades
+        };
+    });
+
+    return (
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-md-8 offset-md-2">
+                    <div className="btn-group float-end">
+                        <button type="button" className="btn btn-light">
+                            <CiSettings className="fs-4" />
+                        </button>
+                        <button type="button" className="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                            <FaFileExport className="me-1" /> Export
+                        </button>
+                        <button type="button" className="btn btn-light">
+                            <FaFileImport className="me-1" /> Import
+                        </button>
+                    </div>
+                    <br /><br />
+                    <div className="row mb-3">
+                        <div className="col-md-6">
+                            <h6><strong>Student Names</strong></h6>
+                            <div className="input-group">
+                                <span className="input-group-text"><FaSearch /></span>
+                                <input type="text" className="form-control" placeholder="Search Students" />
+                                <span className="input-group-text"><FaCaretDown /></span>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <h6><strong>Assignment Names</strong></h6>
+                            <div className="input-group">
+                                <span className="input-group-text"><FaSearch /></span>
+                                <select className="form-select" id="assignment-select">
+                                    <option value="" selected disabled>Search Assignments</option>
+                                    {courseAssignments.map((assignment) => (
+                                        <option key={assignment._id} value={assignment._id}>
+                                            {assignment.title}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" className="btn btn-light mb-3" style={{ width: "20%" }}>
+                        <CiFilter className="me-1" /> Apply Filters
+                    </button>
+                    <div className="table-responsive mb-3">
+                        <table className="table table-striped table-bordered w-100">
+                            <thead>
+                                <tr>
+                                    <th scope="col" className="w-20">Student Name</th>
+                                    {courseAssignments.map((assignment) => (
+                                        <th key={assignment._id} scope="col" className="text-center">
+                                            {assignment.title}<br />
+                                            Out of {assignment.points}
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {studentsWithGrades.map((student) => (
+                                    <tr key={student._id}>
+                                        <th scope="row" className="text-danger">{student.firstName + " " + student.lastName}</th>
+                                        {student.grades.map((grade, index) => (
+                                            <td key={index} className="text-center">{grade}</td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <br /><br /><br /><br /><br /><br /><br />
+                    </div>
+                </div>
             </div>
-            <div className="col-md-6">
-              <h6><b>Assignment Names</b></h6>
-              <div className="input-group">
-                <span className="input-group-text"><FaSearch /> </span>
-                <input placeholder="Search Assignments" type="text" className="form-control" />
-                <span className="input-group-text"><FaCaretDown /></span>
-              </div>
-            </div>
-          </div>
-          <div><br />
-            <button type="button" className="btn btn-light ml-2 " style={{ width: "20%" }}>
-              <CiFilter className="mr-1" /> Apply Filters
-            </button>
-          </div><br />
-          <div className="table-responsive col-lg mb-3">
-            <table className="table-striped table table-bordered mx-0 w-100 table-fixed">
-              <thead>
-                <tr>
-                  <th className="col">Student Name</th>
-                  <td scope="col" className="col text-center">A1 SETUP<h6>out of 100</h6></td>
-                  <td scope="col" className="col text-center">A2 HTML<h6>out of 100</h6></td>
-                  <td scope="col" className="col text-center">A3 CSS<h6>out of 100</h6></td>
-                  <td scope="col" className="col text-center">A4 BOOTSTRAP<h6>out of 100</h6></td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="text-danger col">Jene Adams</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">96.67%</td>
-                  <td className="text-center col">92.18%</td>
-                  <td className="text-center col">66.22%</td>
-                </tr>
-                <tr>
-                  <td className="text-danger col">Christina Allen</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">100%</td>
-                </tr>
-                <tr>
-                  <td className="text-danger col">Samreen Ansari</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">100%</td>
-                </tr>
-                <tr>
-                  <td className="text-danger col">Han Bao</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col "><input type="text" className="form-control text-center" value="88.03" 
-                  style={{ width: '80px', height:'25px' }} /></td>
-                  <td className="text-center col">98.99%</td>
-                </tr>
-                <tr>
-                  <td className="text-danger col">Mahi Sai Srinivas</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">96.67%</td>
-                  <td className="text-center col">98.37%</td>
-                  <td className="text-center col">100%</td>
-                </tr>
-                <tr>
-                  <td className="text-danger col">Siran Cao</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">100%</td>
-                  <td className="text-center col">100%</td>
-                </tr>
-              </tbody>
-            </table>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
