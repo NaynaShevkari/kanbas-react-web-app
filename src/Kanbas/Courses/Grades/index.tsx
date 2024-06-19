@@ -7,6 +7,7 @@ export default function Grades() {
     <div className="container-fluid">
       <div className="row">
       {/* <div className="row"> */}
+      {/* <div className="row"> */}
         <div className="col-md-8 offset-md-2">
           <div className="btn-group ml-2 d-inline me-1 float-end">
             <button type="button" className="btn btn-light mr-2">
