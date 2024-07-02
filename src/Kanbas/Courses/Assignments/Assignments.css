@@ -1,0 +1,33 @@
+.align-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .align-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  .margin-right-20 {
+    margin-right: 20px;
+  }
+
+  .wd-bg-color-gray {
+    background-color: lightgray;
+ }
+
+ #wd-assignment > .list-group-item.active {
+    color: black;
+    background-color: white;
+    border-left: 3px solid green !important;
+  }
+
+  #wd-courses-navigation > .list-group-item.active {
+    color: black;
+    background-color: white;
+    border-left: 3px solid black !important;
+  }
+  
+  
