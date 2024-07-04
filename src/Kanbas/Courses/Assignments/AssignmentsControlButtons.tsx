@@ -1,5 +1,5 @@
 import { IoEllipsisVerticalSharp } from "react-icons/io5";
-import GreenCheckmark from "./GreenCheckmark";
+import GreenCheckMark from "./GreenCheckmark";
 import { BiSolidTrashAlt } from "react-icons/bi";
 import DeleteAssignment from "./DeleteAssignment";
 
@@ -11,7 +11,7 @@ interface AssignmentControlButtonProps {
 const AssignmentControlButton: React.FC<AssignmentControlButtonProps> = ({ assignmentId, deleteAssignment }) => {
     return (
         <div className="float-end d-flex align-items-center">
-            <GreenCheckmark />
+            <GreenCheckMark />
             <BiSolidTrashAlt 
                 className="text-danger mx-2 mb-1" 
                 data-bs-toggle="modal" 
