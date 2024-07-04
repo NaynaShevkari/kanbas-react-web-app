@@ -23,9 +23,9 @@ export default function AssignmentEditor() {
         router(`/Kanbas/Courses/${cid}/Assignments`);
     }
 
-    const handleChange = (e: any) => {
-        const value = e.target.value;
-        setAssignment({ ...assignment, [e.target.name]: value });
+    const handleChange = (event: any) => {
+        const value = event.target.value;
+        setAssignment({ ...assignment, [event.target.name]: value });
     };
 
     return (
@@ -161,13 +161,10 @@ export default function AssignmentEditor() {
                         </div>
                     </div>
                 </div>
-                <div className="row mt-3">
-                    <hr />
-                </div>
-
+                <hr />
                 <div className="mb-2 text-end">
-                <input type="button" className="btn btn-danger ms-2 float-end" value="Save"
-                           onClick={handleUpdateAssignment}/>
+                    <input type="button" className="btn btn-danger ms-2 float-end" value="Save"
+                        onClick={handleUpdateAssignment} />
                     <Link key={'cancel'} to={`/Kanbas/Courses/${cid}/Assignments`}>
                         <input type="button" className="btn btn-secondary " value="Cancel" />
                     </Link>

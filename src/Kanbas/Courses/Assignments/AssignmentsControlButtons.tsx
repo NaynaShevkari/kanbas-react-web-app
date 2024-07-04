@@ -1,5 +1,5 @@
 import { IoEllipsisVerticalSharp } from "react-icons/io5";
-import GreenCheckmark from "./GreenCheckMark";
+import GreenCheckmark from "./GreenCheckmark";
 import { BiSolidTrashAlt } from "react-icons/bi";
 import DeleteAssignment from "./DeleteAssignment";
 

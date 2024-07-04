@@ -4,8 +4,8 @@ import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { PiNotePencilLight } from "react-icons/pi";
 import { IoEllipsisVerticalCircleSharp } from "react-icons/io5";
-import AssignmentControlButton from "./AssignmentControlButton";
-import AssignmentControl from "./AssignementControl";
+import AssignmentsControlButtons from "./AssignmentsControlButtons";
+import AssignmentsControls from "./AssignmentsControls";
 import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
@@ -18,7 +18,7 @@ export default function Assignments() {
 
   return (
     <div id="assignments">
-      <AssignmentControl cid={cid!} />
+      <AssignmentsControls cid={cid!} />
 <br/>
 <br/>
       <div className="list-group mb-5 fs-5 border-gray">
@@ -72,7 +72,7 @@ export default function Assignments() {
                 </p>
                 </div>
                 <div className="col">
-                  <AssignmentControlButton assignmentId={item._id} deleteAssignment={(assignmentId) => {
+                  <AssignmentsControlButtons assignmentId={item._id} deleteAssignment={(assignmentId) => {
                       dispatch(deleteAssignment(assignmentId));
                     }} />
                 </div>
@@ -81,7 +81,7 @@ export default function Assignments() {
           ))
         }
       </div>
-      <br /><br /><br /><br /><br /><br /><br /><br />
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </div>
   );
 }

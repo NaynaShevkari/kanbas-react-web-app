@@ -34,13 +34,13 @@ const DeleteAssignment: React.FC<DeleteAssignmentProps> = ({ assignmentId, onDel
                             className="btn btn-danger"
                             data-bs-dismiss="modal"
                             onClick={handleDelete}>
-                            Yes
+                            Delete
                         </button>
                         <button
                             type="button"
                             className="btn btn-secondary"
                             data-bs-dismiss="modal">
-                            No
+                            Cancel
                         </button>
                     </div>
                 </div>
