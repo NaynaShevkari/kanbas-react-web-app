@@ -1,4 +1,4 @@
-import { assignments } from "../../Database";
+import { assignments } from "../../Database"; // Error
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   assignments: assignments,
