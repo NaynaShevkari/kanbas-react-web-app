@@ -6,7 +6,9 @@ import { PiNotePencilLight } from "react-icons/pi";
 import { IoEllipsisVerticalCircleSharp } from "react-icons/io5";
 import AssignmentsControlButtons from "./AssignmentsControlButtons";
 import AssignmentsControls from "./AssignmentsControls";
-import { deleteAssignment } from "./reducer";
+import { deleteAssignment, setAssignments } from "./reducer";
+import { useState, useEffect } from "react";
+import * as client from "./client";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -14,6 +16,20 @@ export default function Assignments() {
 
   const assignmentCid = assignments.filter((assignment: any) => assignment.course === cid);
   const dispatch = useDispatch();
+
+  const removeAssignment = async (assignmentId: string) => {
+    await client.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
+
+  const fetchAssignments = async () => {
+    const assignments = await client.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
   console.log(assignments)
 
   return (
@@ -73,7 +89,7 @@ export default function Assignments() {
                 </div>
                 <div className="col">
                   <AssignmentsControlButtons assignmentId={item._id} deleteAssignment={(assignmentId) => {
-                      dispatch(deleteAssignment(assignmentId));
+                      removeAssignment(assignmentId); 
                     }} />
                 </div>
               </div>
