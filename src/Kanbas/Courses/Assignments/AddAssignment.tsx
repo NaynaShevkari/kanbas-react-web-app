@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { addAssignment } from "./reducer";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import * as client from "./client";
 
 export default function AddAssignment() {
 
@@ -25,9 +26,19 @@ export default function AddAssignment() {
         setAssignment({ ...assignment, [event.target.name]: value });
     };
 
-    const handleAddAssignment = () => {
-        dispatch(addAssignment(assignment));
+    // const handleAddAssignment = () => {
+    //     dispatch(addAssignment(assignment));
+    //     router(`/Kanbas/Courses/${cid}/Assignments`);
+    // }
+
+    const createAssignment = async (assignment: any) => {
+        const newAssignment = await client.createAssignment(cid as string, assignment);
+        dispatch(addAssignment(newAssignment));
         router(`/Kanbas/Courses/${cid}/Assignments`);
+    };
+
+    const handleAddAssignment = () => {
+        createAssignment(assignment);
     }
     return (
         <div id="wd-assignments-editor">
