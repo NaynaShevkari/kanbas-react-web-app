@@ -29,7 +29,6 @@ export default function PeopleTable() {
         }
     };
 
-
     const fetchUsers = async () => {
         const users = await client.findAllUsers();
         setUsers(users);

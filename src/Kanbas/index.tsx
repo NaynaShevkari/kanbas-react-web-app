@@ -31,27 +31,11 @@ export default function Kanbas() {
     setCourses([ ...courses, newCourse ]);
   };
 
-  // const deleteCourse = (courseId: any) => {
-  //   setCourses(courses.filter((course) => course._id !== courseId));
-  // };
-
   const deleteCourse = async (courseId: string) => {
     await client.deleteCourse(courseId);
     setCourses(courses.filter(
       (c) => c._id !== courseId));
   };
-
-  // const updateCourse = () => {
-  //   setCourses(
-  //     courses.map((c) => {
-  //       if (c._id === course._id) {
-  //         return course;
-  //       } else {
-  //         return c;
-  //       }
-  //     })
-  //   );
-  // };
 
   const updateCourse = async () => {
     await client.updateCourse(course);
@@ -79,7 +63,7 @@ export default function Kanbas() {
               <Route path="Account" element={<h1>Account</h1>} />
               <Route path="/Account/*" element={<Account />} />
               <Route path="Dashboard" element={
-                // <ProtectedRoute>
+                <ProtectedRoute>
                   <Dashboard
                 courses={courses}
                 course={course}
@@ -87,7 +71,7 @@ export default function Kanbas() {
                 addNewCourse={addNewCourse}
                 deleteCourse={deleteCourse}
                 updateCourse={updateCourse} />
-                // </ProtectedRoute>
+                  </ProtectedRoute>
               } />
               <Route path="Courses/:cid/*" element={<ProtectedRoute><Courses courses={courses} /></ProtectedRoute>} />
               <Route path="Calendar" element={<h1>Calendar</h1>} />
